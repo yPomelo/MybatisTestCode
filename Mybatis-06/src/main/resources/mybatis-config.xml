@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!--    properties引入外部配置文件-->
+    <properties resource="db.properties"></properties>
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <!--    typeAliases可以给实体类起别名-->
+<!--    方式一,给指定类起别名-->
+<!--    <typeAliases>-->
+<!--        <typeAlias type="com.yyy.pojo.User" alias="User"/>-->
+<!--    </typeAliases>-->
+<!--    方式二,扫描实体类的包，自动起别名，当实体类较多建议用方式二-->
+<!--    方式一可以自定义别名，方式二不行，但是如果类中包含@Alias("xxxx")注解，则别名为注解值-->
+    <typeAliases>
+        <package name="com.yyy.pojo"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+<mappers>
+    <mapper resource="com/yyy/dao/StudentMapper.xml"></mapper>
+    <mapper resource="com/yyy/dao/TeacherMapper.xml"></mapper>
+</mappers>
+
+
+</configuration>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--加注释会报错 将utf-8改为utf8错误消失-->
+<!--namespace是接口类的全名-->
+<!--id是接口中的方法名 resultType是方法的返回值类型-->
+<mapper namespace="com.yyy.dao.UserMapper">
+
+<!--    结果集映射-->
+    <resultMap id="Usermap" type="User">
+<!--        column是数据库中的字段，property是实体类中的属性-->
+        <result column="id" property="id"></result>
+        <result column="name" property="name"></result>
+        <result column="pwd" property="password"></result>
+    </resultMap>
+    <select id="getUserByID" parameterType="int" resultMap="Usermap">
+        select * from user where id = #{id}
+    </select>
+    <select id="getUserByLimit" parameterType="map" resultMap="Usermap">
+        select * from user limit #{startIndex},#{pageSize}
+    </select>
+</mapper>
